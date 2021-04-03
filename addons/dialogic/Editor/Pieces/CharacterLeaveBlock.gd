@@ -1,14 +1,13 @@
 tool
-extends Control
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
-var editor_reference
 var character_selected = ''
 
-# This is the information of this event and it will get parsed and saved to the JSON file.
-var event_data = {
-	'action': 'leaveall',
-	'character': '[All]',
-}
+
+func _init().('CharacterLeaveBlock'):
+	event_label = 'Character Leave'
+	event_data['action'] = 'leaveall'
+	event_data['character'] = '[All]'
 
 
 func _ready():
@@ -30,11 +29,12 @@ func _on_character_selected(index):
 	var text = $PanelContainer/VBoxContainer/Header/CharacterDropdown.get_popup().get_item_text(index)
 	var metadata = $PanelContainer/VBoxContainer/Header/CharacterDropdown.get_popup().get_item_metadata(index)
 	$PanelContainer/VBoxContainer/Header/CharacterDropdown.text = text
-	event_data['character'] = metadata['file']
+	if (metadata.has('file')):
+		event_data['character'] = metadata['file']
 
 
 func load_data(data):
-	event_data = data
+	.load_data(data)
 	if data['character'] != '[All]':
 		if data['character'] != '':
 			var character_data = DialogicResources.get_character_json(data['character'])

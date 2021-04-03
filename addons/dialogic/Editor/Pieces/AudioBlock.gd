@@ -1,21 +1,28 @@
 tool
-extends HBoxContainer
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
-var editor_reference
-var editorPopup
 
 var play_icon = load("res://addons/dialogic/Images/play.svg")
 var stop_icon = load("res://addons/dialogic/Images/stop.svg")
 
-# This is the information of this event and it will get parsed and saved to the JSON file.
-var event_data = {
-	'audio': 'stop',
-	'file': ''
-}
+
+func _init().('AudioBlock'):
+	event_label = 'Audio Block'
+	event_data['audio'] = 'stop'
+	event_data['file'] = ''
+
+	pass
 
 
+func load_data(data):
+	# call super
+	.load_data(data)
+	load_audio(data['file'])
+	
+	
 func _ready():
 	load_audio('')
+
 
 func _on_ButtonAudio_pressed():
 	editor_reference.godot_dialog("*.wav, *.ogg, *.mp3")
@@ -39,11 +46,6 @@ func load_audio(path: String):
 		$PanelContainer/VBoxContainer/Header/ButtonPreviewPlay.disabled = true
 		event_data['file'] = ''
 		event_data['audio'] = 'stop'
-
-
-func load_data(data):
-	event_data = data
-	load_audio(data['file'])
 
 
 func _on_ButtonPreviewPlay_pressed():

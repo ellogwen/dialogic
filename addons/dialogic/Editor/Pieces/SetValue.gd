@@ -1,16 +1,12 @@
 tool
-extends Control
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
-var editor_reference
-var editorPopup
+func _init().('SetValue'):
+	event_label = 'Set Value'
+	event_data['definition'] = ''
+	event_data['operation'] = '='
+	event_data['set_value'] = ''
 
-
-# This is the information of this event and it will get parsed and saved to the JSON file.
-var event_data = {
-	'definition': '',
-	'operation': '=',
-	'set_value': '',
-}
 
 onready var nodes = {
 	'definition_picker': $PanelContainer/VBoxContainer/Header/DefinitionPicker,
@@ -26,13 +22,14 @@ func _on_definition_entry_selected(index):
 	var metadata = nodes['definition_picker'].get_popup().get_item_metadata(index)
 	event_data['definition'] = metadata['id']
 
+
 func _on_operation_entry_selected(index):
 	var metadata = nodes['operation_picker'].get_popup().get_item_metadata(index)
 	event_data['operation'] = metadata['operation']
 
 
 func load_data(data):
-	event_data = data
+	.load_data(data)
 	$PanelContainer/VBoxContainer/Header/LineEdit.text = event_data['set_value']
 	nodes['definition_picker'].load_definition(data['definition'])
 	var operation = ''

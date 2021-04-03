@@ -1,14 +1,9 @@
 tool
-extends Control
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
-var editor_reference
-var editorPopup
-
-
-# This is the information of this event and it will get parsed and saved to the JSON file.
-var event_data = {
-	'set_theme': ''
-}
+func _init().('SetTheme'):
+	event_label = 'Set Theme'
+	event_data['set_theme'] = ''
 
 
 func _ready():
@@ -17,7 +12,7 @@ func _ready():
 
 
 func load_data(data):
-	event_data = data
+	.load_data(data)
 	if event_data['set_theme'] != '':
 		for theme in DialogicUtil.get_theme_list():
 			if theme['file'] == event_data['set_theme']:

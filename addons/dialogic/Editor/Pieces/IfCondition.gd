@@ -1,16 +1,12 @@
 tool
-extends Control
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
-var editor_reference
-var editorPopup
+func _init().('IfCondition'):
+	event_label = 'If Condition'
+	event_data['condition'] = '=='
+	event_data['definition'] = ''
+	event_data['value'] = ''
 
-
-# This is the information of this event and it will get parsed and saved to the JSON file.
-var event_data = {
-	'condition': '==',
-	'definition': '',
-	'value': ''
-}
 
 onready var nodes = {
 	'definition_picker': $PanelContainer/VBoxContainer/Header/DefinitionPicker,
@@ -28,7 +24,7 @@ func _on_text_changed(new_text):
 
 
 func load_data(data):
-	event_data = data
+	.load_data(data)
 	$PanelContainer/VBoxContainer/Header/CustomLineEdit.text = event_data['value']
 	nodes['definition_picker'].load_definition(data['definition'])
 	nodes['condition_picker'].load_condition(data['condition'])

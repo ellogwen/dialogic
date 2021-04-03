@@ -1,15 +1,13 @@
 tool
-extends Control
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
-var editor_reference
-var editorPopup
 var preview = "..."
 onready var toggler = get_node("PanelContainer/VBoxContainer/Header/VisibleToggle")
 
-# This is the information of this event and it will get parsed and saved to the JSON file.
-var event_data = {
-	'background': ''
-}
+
+func _init().('SceneEvent'):
+	event_label = 'Scene Event'
+	event_data['background'] = ''
 
 
 func _ready():
@@ -27,7 +25,7 @@ func _on_file_selected(path, target):
 
 
 func load_data(data):
-	event_data = data
+	.load_data(data)
 	load_image(event_data['background'])
 
 

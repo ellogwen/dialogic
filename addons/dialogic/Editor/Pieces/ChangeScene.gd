@@ -1,12 +1,10 @@
 tool
-extends Control
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
-var editor_reference
-var editorPopup
 
-var event_data = {
-	'change_scene': ''
-}
+func _init().('ChangeScene'):
+	event_label = 'Change Scene'
+	event_data['change_scene'] = ''
 
 
 func _on_ButtonScenePicker_pressed():
@@ -24,6 +22,6 @@ func select_scene(path):
 
 
 func load_data(data):
-	event_data = data
+	.load_data(data)
 	if data['change_scene'] != '':
 		select_scene(data['change_scene'])

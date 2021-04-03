@@ -264,7 +264,7 @@ func create_event(scene: String, data: Dictionary = {'no-data': true} , indent: 
 		timeline.add_child(piece)
 	if data.has('no-data') == false:
 		piece.load_data(data)
-	
+		
 	piece.connect("gui_input", self, '_on_gui_input', [piece])
 	events_warning.visible = false
 	# Indent on create
@@ -338,41 +338,41 @@ func load_timeline(filename: String):
 	data = data['events']
 	for i in data:
 		match i:
-			{'text', 'character', 'portrait'}:
+			{'text', 'character', 'portrait', ..}:
 				create_event("TextBlock", i)
-			{'background'}:
+			{'background', ..}:
 				create_event("SceneEvent", i)
-			{'character', 'action', 'position', 'portrait'}:
+			{'character', 'action', 'position', 'portrait', ..}:
 				create_event("CharacterJoinBlock", i)
-			{'audio', 'file'}:
+			{'audio', 'file', ..}:
 				create_event("AudioBlock", i)
-			{'background-music', 'file'}:
+			{'background-music', 'file', ..}:
 				create_event("BackgroundMusic", i)
-			{'question', 'options'}:
+			{'question', 'options', ..}:
 				create_event("Question", i)
-			{'choice'}:
+			{'choice', ..}:
 				create_event("Choice", i)
-			{'endbranch'}:
+			{'endbranch', ..}:
 				create_event("EndBranch", i)
-			{'character', 'action'}:
+			{'character', 'action', ..}:
 				create_event("CharacterLeaveBlock", i)
-			{'change_timeline'}:
+			{'change_timeline', ..}:
 				create_event("ChangeTimeline", i)
-			{'emit_signal'}:
+			{'emit_signal', ..}:
 				create_event("EmitSignal", i)
-			{'change_scene'}:
+			{'change_scene', ..}:
 				create_event("ChangeScene", i)
-			{'close_dialog'}:
+			{'close_dialog', ..}:
 				create_event("CloseDialog", i)
-			{'wait_seconds'}:
+			{'wait_seconds', ..}:
 				create_event("WaitSeconds", i)
-			{'condition', 'definition', 'value'}:
+			{'condition', 'definition', 'value', ..}:
 				create_event("IfCondition", i)
 			{'set_value', 'definition', ..}:
 				create_event("SetValue", i)
-			{'set_theme'}:
+			{'set_theme', ..}:
 				create_event("SetTheme", i)
-			{'call_node'}:
+			{'call_node', ..}:
 				create_event("CallNode", i)
 
 	if data.size() < 1:

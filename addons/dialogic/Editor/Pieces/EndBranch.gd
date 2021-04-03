@@ -1,14 +1,10 @@
 tool
-extends Control
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
-var editor_reference
-var editorPopup
-
-
-var event_data = {
-	'endbranch': ''
-}
+func _init().('EndBranch'):
+	event_label = 'End Branch'
+	event_data['endbranch'] = ''
 
 
 func load_data(data):
-	event_data = data
+	.load_data(data)

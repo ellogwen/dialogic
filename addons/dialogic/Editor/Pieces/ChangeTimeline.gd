@@ -1,14 +1,10 @@
 tool
-extends Control
-
-var editor_reference
-var editorPopup
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
 
-# This is the information of this event and it will get parsed and saved to the JSON file.
-var event_data = {
-	'change_timeline': ''
-}
+func _init().('ChangeTimeline'):
+	event_label = 'Change Timeline'
+	event_data['change_timeline'] = ''
 
 
 func _ready():
@@ -16,7 +12,7 @@ func _ready():
 
 
 func load_data(data):
-	event_data = data
+	.load_data(data)
 	if event_data['change_timeline'] != '':
 		for c in DialogicUtil.get_timeline_list():
 			if c['file'] == event_data['change_timeline']:

@@ -1,22 +1,18 @@
 tool
-extends Control
-
-var editor_reference
-var editorPopup
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
 
-# This is the information of this event and it will get parsed and saved to the JSON file.
-var event_data = {
-	'call_node': {
+func _init().('CallNode'):
+	event_label = 'Call Node'
+	event_data['call_node'] = {
 		'target_node_path': '',
 		'method_name': '',
 		'arguments': []
 	}
-}
 
 
 func load_data(data):
-	event_data = data
+	.load_data(data)
 	
 	if (not event_data['call_node']['arguments'] is Array):
 		event_data['call_node']['arguments'] = []

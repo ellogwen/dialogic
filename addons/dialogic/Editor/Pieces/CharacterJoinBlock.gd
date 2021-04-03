@@ -1,19 +1,18 @@
 tool
-extends Control
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
-var editor_reference
 onready var portrait_picker = $PanelContainer/VBoxContainer/Header/PortraitPicker
 
 var current_color = Color('#ffffff')
 var default_icon_color = Color("#65989898")
 
-# This is the information of this event and it will get parsed and saved to the JSON file.
-var event_data = {
-	'action': 'join',
-	'character': '',
-	'portrait': '',
-	'position': {"0":false,"1":false,"2":false,"3":false,"4":false}
-}
+
+func _init().('CharacterJoinBlock'):
+	event_label = 'Character Join'
+	event_data['action'] = 'join'
+	event_data['character'] = ''
+	event_data['portrait'] = ''
+	event_data['position'] = {"0":false,"1":false,"2":false,"3":false,"4":false}
 
 
 func _ready():
@@ -76,7 +75,7 @@ func check_active_position(active_color = Color("#ffffff")):
 
 
 func load_data(data):
-	event_data = data
+	.load_data(data)
 	if data['character'] != '':
 		var character_data = DialogicResources.get_character_json(data['character'])
 		$PanelContainer/VBoxContainer/Header/CharacterPicker.set_data(character_data['name'], Color(character_data['color']))

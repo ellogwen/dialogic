@@ -1,19 +1,19 @@
 tool
-extends Control
+extends "res://addons/dialogic/Editor/Pieces/TimelineEventBase.gd"
 
 var text_height = 26
-var editor_reference
 var preview = ''
+
 onready var toggler = get_node("PanelContainer/VBoxContainer/Header/VisibleToggle")
-
-# This is the information of this event and it will get parsed and saved to the JSON file.
-var event_data = {
-	'character': '',
-	'text': '',
-	'portrait': '',
-}
-
 onready var portrait_picker = $PanelContainer/VBoxContainer/Header/PortraitPicker
+
+
+func _init().('TextBlock'):
+	event_label = 'Text'
+	event_data['character'] = ''
+	event_data['text'] = ''
+	event_data['portrait'] = ''
+
 
 func _ready():
 	connect("gui_input", self, '_on_gui_input')
@@ -59,7 +59,7 @@ func load_text(text):
 
 
 func load_data(data):
-	event_data = data
+	.load_data(data)
 	$PanelContainer/VBoxContainer/TextEdit.text = event_data['text']
 	update_preview()
 
@@ -113,6 +113,7 @@ func _on_saver_timer_timeout():
 	update_preview()
 	
 	
+# @Override
 # gets called when the user selects this node in the timeline
 func on_timeline_selected():
 	$PanelContainer/VBoxContainer/TextEdit.grab_focus()
